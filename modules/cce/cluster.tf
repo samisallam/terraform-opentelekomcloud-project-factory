@@ -78,9 +78,14 @@ resource "opentelekomcloud_cce_cluster_v3" "cluster" {
     delete = "60m"
   }
   
-  lifecycle {
-    ignore_changes = [eip, certificate_clusters, certificate_users, container_network_cidr]
-  }
+lifecycle {
+  ignore_changes = [
+    container_network_cidr,  # Ignore CIDR block changes
+    eip,
+    certificate_clusters,
+    certificate_users
+  ]
+}
 
 }
 
