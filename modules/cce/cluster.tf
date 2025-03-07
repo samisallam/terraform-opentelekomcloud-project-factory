@@ -77,6 +77,11 @@ resource "opentelekomcloud_cce_cluster_v3" "cluster" {
     create = "60m"
     delete = "60m"
   }
+  
+  lifecycle {
+    ignore_changes = [eip, certificate_clusters, certificate_users, container_network_cidr]
+  }
+
 }
 
 resource "opentelekomcloud_cce_node_pool_v3" "cluster_node_pool" {
