@@ -24,6 +24,9 @@ resource "opentelekomcloud_vpc_eip_v1" "cce_eip" {
   publicip {
     type = "5_bgp"
   }
+  lifecycle {
+    ignore_changes = "all"
+  }
 }
 
 resource "random_id" "id" {
@@ -78,15 +81,14 @@ resource "opentelekomcloud_cce_cluster_v3" "cluster" {
     delete = "60m"
   }
   
-lifecycle {
-  ignore_changes = [
-    container_network_cidr,  # Ignore CIDR block changes
-    eip,
-    certificate_clusters,
-    certificate_users
-  ]
-}
-
+  lifecycle {
+    ignore_changes = [
+      container_network_cidr,
+      eip,
+      certificate_clusters,
+      certificate_users,
+    ]
+  }
 }
 
 resource "opentelekomcloud_cce_node_pool_v3" "cluster_node_pool" {
@@ -136,6 +138,6 @@ resource "opentelekomcloud_cce_node_pool_v3" "cluster_node_pool" {
     ignore_changes = [
       initial_node_count,
     ]
-#    # create_before_destroy = true
+    create_before_destroy = true
   }
 }
