@@ -69,7 +69,7 @@ resource "opentelekomcloud_cce_cluster_v3" "cluster" {
   vpc_id                   = var.cluster_vpc_id
   subnet_id                = var.cluster_subnet_id
   container_network_type   = local.cluster_container_network_type
-  container_network_cidr   = var.cluster_container_cidr
+  # container_network_cidr   = var.cluster_container_cidr
   kubernetes_svc_ip_range  = var.cluster_service_cidr
   description              = "Kubernetes Cluster ${var.name}."
   # eip                      = var.cluster_public_access ? opentelekomcloud_vpc_eip_v1.cce_eip[0].publicip[0].ip_address : null
