@@ -12,7 +12,7 @@ resource "opentelekomcloud_compute_keypair_v2" "cluster_keypair" {
   public_key = tls_private_key.cluster_keypair.public_key_openssh
 
   lifecycle {
-    ignore_changes = "all"
+    ignore_changes = all
   }
 }
 
@@ -30,7 +30,7 @@ resource "opentelekomcloud_vpc_eip_v1" "cce_eip" {
   }
 
   lifecycle {
-    ignore_changes = "all"
+    ignore_changes = all
   }
 }
 
@@ -39,7 +39,7 @@ resource "random_id" "id" {
   byte_length = 4
 
   lifecycle {
-    ignore_changes = "all"
+    ignore_changes = all
   }  
 }
 
@@ -51,7 +51,7 @@ resource "opentelekomcloud_kms_key_v1" "node_storage_encryption_key" {
   is_enabled      = "true"
 
   lifecycle {
-    ignore_changes = "all"
+    ignore_changes = all
   }
 }
 
@@ -60,7 +60,7 @@ data "opentelekomcloud_kms_key_v1" "node_storage_encryption_existing_key" {
   key_alias = var.node_storage_encryption_kms_key_name
 
   lifecycle {
-    ignore_changes = "all"
+    ignore_changes = all
   }
 }
 
