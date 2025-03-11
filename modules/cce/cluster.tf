@@ -11,9 +11,9 @@ resource "opentelekomcloud_compute_keypair_v2" "cluster_keypair" {
   name       = "${var.name}-cluster-keypair-${random_id.cluster_keypair_id.hex}"
   public_key = tls_private_key.cluster_keypair.public_key_openssh
 
-  lifecycle {
-    ignore_changes = all
-  }
+  # lifecycle {
+  #   ignore_changes = all
+  # }
 }
 
 resource "opentelekomcloud_vpc_eip_v1" "cce_eip" {
@@ -35,9 +35,9 @@ resource "random_id" "id" {
   count       = var.node_storage_encryption_enabled && var.node_storage_encryption_kms_key_name == null ? 1 : 0
   byte_length = 4
 
-  lifecycle {
-    ignore_changes = all
-  }  
+  # lifecycle {
+  #   ignore_changes = all
+  # }
 }
 
 resource "opentelekomcloud_kms_key_v1" "node_storage_encryption_key" {
@@ -47,9 +47,9 @@ resource "opentelekomcloud_kms_key_v1" "node_storage_encryption_key" {
   pending_days    = 7
   is_enabled      = "true"
 
-  lifecycle {
-    ignore_changes = all
-  }
+  # lifecycle {
+  #   ignore_changes = all
+  # }
 }
 
 data "opentelekomcloud_kms_key_v1" "node_storage_encryption_existing_key" {
@@ -96,7 +96,7 @@ resource "opentelekomcloud_cce_cluster_v3" "cluster" {
       container_network_cidr,
       eip,
       certificate_clusters,
-      certificate_users,
+      certificate_users
     ]
   }
 }
@@ -146,7 +146,7 @@ resource "opentelekomcloud_cce_node_pool_v3" "cluster_node_pool" {
 
   lifecycle {
     ignore_changes = [
-      initial_node_count,
+      initial_node_count
     ]
     create_before_destroy = true
   }
