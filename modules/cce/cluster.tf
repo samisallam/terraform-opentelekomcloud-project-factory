@@ -58,10 +58,6 @@ resource "opentelekomcloud_kms_key_v1" "node_storage_encryption_key" {
 data "opentelekomcloud_kms_key_v1" "node_storage_encryption_existing_key" {
   count     = var.node_storage_encryption_enabled && var.node_storage_encryption_kms_key_name != null ? 1 : 0
   key_alias = var.node_storage_encryption_kms_key_name
-
-  lifecycle {
-    ignore_changes = all
-  }
 }
 
 locals {
