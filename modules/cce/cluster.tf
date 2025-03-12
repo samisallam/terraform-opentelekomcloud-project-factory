@@ -60,7 +60,7 @@ resource "opentelekomcloud_cce_cluster_v3" "cluster" {
   # container_network_cidr   = var.cluster_container_cidr
   kubernetes_svc_ip_range  = var.cluster_service_cidr
   description              = "Kubernetes Cluster ${var.name}."
-  # eip                      = var.cluster_public_access ? opentelekomcloud_vpc_eip_v1.cce_eip[0].publicip[0].ip_address : null
+  eip                      = var.cluster_public_access ? opentelekomcloud_vpc_eip_v1.cce_eip[0].publicip[0].ip_address : null
   cluster_version          = var.cluster_version
   authentication_mode      = var.cluster_authentication_mode
   annotations              = var.cluster_install_icagent ? { "cluster.install.addons.external/install" = jsonencode([{ addonTemplateName = "icagent" }]) } : null
